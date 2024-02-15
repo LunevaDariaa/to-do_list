@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
     <title>To-Do List</title>
   </head>
   <body>
@@ -17,7 +18,52 @@
 
         <button class="add-activity-btn">+</button>
       </div>
-      <div class="main-screen"></div>
+      <div class="main-screen">
+        <div class="page_type">Today's plans</div>
+        <hr class="custom-line" />
+      </div>
+    </div>
+    <div class="add_task_page hidden">
+      <!-- Header -->
+      <div class="add_task_header">
+        <div class="add_task_header_info">Create new</div>
+        <button class="add_task_close_btn">x</button>
+      </div>
+      <!-- Sidebar -->
+      <div class="add_task_content">
+        <div class="add_task_sidebar">
+          <div class="add_task add_task_task">Add Task</div>
+          <div class="add_task add_task_project">Add Project</div>
+          <div class="add_task add_task_note">Add Note</div>
+        </div>
+        <!-- Main -->
+
+        <!-- Create task -->
+        <!-- <div class="add_task_main_screen">
+          <form id="dateTimeForm">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required />
+
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required />
+
+            <button type="button" onclick="submitForm()">Submit</button>
+          </form>
+        </div> -->
+
+        <!-- add Note -->
+        <div class="add_note_content">
+          <textarea
+            name="note"
+            id="add_note_input"
+            cols="30"
+            rows="16"
+            placeholder="New note.."
+          ></textarea>
+
+          <button class="add_note_btn" type="submit">ADD</button>
+        </div>
+      </div>
     </div>
   </body>
 </html>
