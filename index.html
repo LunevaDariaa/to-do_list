@@ -10,6 +10,7 @@
   <body>
     <div class="app_container">
       <div class="sidebar">
+        <li></li>
         <li>Your to-dos</li>
         <li>Today's plans</li>
         <li>Add Task</li>
@@ -21,6 +22,35 @@
       <div class="main-screen">
         <div class="page_type">Today's plans</div>
         <hr class="custom-line" />
+        <!-- Notes content -->
+        <div class="notes">
+          <div id="note">
+            <div class="note_text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
+              dolore ut velit, ipsam rem, quia placeat qui in, et expedita
+              incidunt! Sint, asperiores deserunt impedit rerum animi ea magnam
+              harum?
+            </div>
+            <div class="note_btns">
+            <button class="note_edit_btn">🖋</button>
+            <button class="note_dlt_btn">🗑</button>
+          </div>
+          </div>
+
+          <div id="note">
+            <div class="note_text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
+              dolore ut velit, ipsam rem, quia placeat qui 
+            </div>
+            <div class="note_btns">
+            <button class="note_edit_btn">🖋</button>
+            <button class="note_dlt_btn">🗑</button>
+          </div>
+          </div>
+
+
+          </div>
+        </div>
       </div>
     </div>
     <div class="add_task_page hidden">
@@ -36,6 +66,8 @@
           <div class="add_task add_task_project">Add Project</div>
           <div class="add_task add_task_note">Add Note</div>
         </div>
+        <hr class="custom-line" />
+
         <!-- Main -->
 
         <!-- Create task -->
@@ -65,5 +97,6 @@
         </div>
       </div>
     </div>
+    <div class="overlay hidden"></div>
   </body>
 </html>
