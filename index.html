@@ -66,9 +66,9 @@
       <!-- Sidebar -->
       <div class="add_tasks_content">
         <div class="add_task_sidebar">
-          <div class="add_task add_task_task" value="task">Add Task</div>
-          <div class="add_task add_task_project" value="project">Add Project</div>
-          <div class="add_task add_task_note" value="note">Add Note</div>
+          <div class="add_task add_task_task" data-type="task">Add Task</div>
+          <div class="add_task add_task_project" data-type="project">Add Project</div>
+          <div class="add_task add_task_note" data-type="note">Add Note</div>
         </div>
         <hr class="custom-line" />
 
@@ -128,6 +128,7 @@
             cols="30"
             rows="10"
             placeholder="New note.."
+            required
           ></textarea>
 
           <button class="add_note_btn" type="submit">ADD</button>
