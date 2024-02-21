@@ -28,6 +28,7 @@
         <!-- Notes content -->
         <div class="notes">
           <div id="note">
+            <div class="note_title">LALALALA</div>
             <div class="note_text">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
               dolore ut velit, ipsam rem, quia placeat qui in, et expedita
@@ -74,15 +75,23 @@
         <!-- Main activities-->
 
         <!-- Create task -->
-        <div class="add_task_content hidden ">
+        <div class="add_task_content  ">
 
           <textarea
-          name="note"
+          name="task"
+          id="add_task_title"
+          cols="30"
+          rows="1"
+          placeholder="Title"
+        ></textarea>
+
+        <textarea
+          name="task"
           id="add_task_input"
           cols="30"
-          rows="15"
-          placeholder="New Task.."
-        ></textarea></br>  
+          rows="10"
+          placeholder="New task.."
+        ></textarea>
 
           <form id="dateTimeForm">
           
@@ -92,22 +101,32 @@
             <label for="time">Time:</label>
             <input type="time" id="time" name="time" required />
 
-            <button type="button" onclick="submitForm()">Submit</button>
+            
           </form>
+          <button type="button" class="add_task_btn"submitForm()">CREATE</button>
         </div>
 
         <!-- Add project -->
-        <div class="add_project_content">
-        <input type="text" class="add_project_input">
+        <div class="add_project_content hidden">
+        <textarea name="project" class="add_project_input" placeholder="Title" cols="30" rows="10"></textarea><br>
+        <button class="add_project_btn">CREATE</button>
         </div>
 
         <!-- add Note -->
         <div class="add_note_content hidden">
           <textarea
             name="note"
+            id="add_note_title"
+            cols="30"
+            rows="1"
+            placeholder="Title"
+          ></textarea>
+
+          <textarea
+            name="note"
             id="add_note_input"
             cols="30"
-            rows="16"
+            rows="10"
             placeholder="New note.."
           ></textarea>
 
