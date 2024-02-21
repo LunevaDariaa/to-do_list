@@ -10,12 +10,15 @@
   <body>
     <div class="app_container">
       <div class="sidebar">
-        <li></li>
-        <li>Your to-dos</li>
-        <li>Today's plans</li>
-        <li>Add Task</li>
-        <li>Add Project</li>
-        <li>Notes</li>
+        
+        <div class="home_page">Your to-dos</div>
+        <div class="today_page">Today's plans</div>
+        <div class="projects_page">Projects
+<!-- Projects list -->
+          <div class="project"> --  Home</div>
+          <div class="project"> --  Workout</div>
+        </div>
+        <div class="notepad_page">NotePad</div>
 
         <button class="add-activity-btn">+</button>
       </div>
@@ -60,31 +63,46 @@
         <button class="add_task_close_btn">x</button>
       </div>
       <!-- Sidebar -->
-      <div class="add_task_content">
+      <div class="add_tasks_content">
         <div class="add_task_sidebar">
-          <div class="add_task add_task_task">Add Task</div>
-          <div class="add_task add_task_project">Add Project</div>
-          <div class="add_task add_task_note">Add Note</div>
+          <div class="add_task add_task_task" value="task">Add Task</div>
+          <div class="add_task add_task_project" value="project">Add Project</div>
+          <div class="add_task add_task_note" value="note">Add Note</div>
         </div>
         <hr class="custom-line" />
 
-        <!-- Main -->
+        <!-- Main activities-->
 
         <!-- Create task -->
-        <!-- <div class="add_task_main_screen">
+        <div class="add_task_content hidden ">
+
+          <textarea
+          name="note"
+          id="add_task_input"
+          cols="30"
+          rows="15"
+          placeholder="New Task.."
+        ></textarea></br>  
+
           <form id="dateTimeForm">
+          
             <label for="date">Date:</label>
-            <input type="date" id="date" name="date" required />
+            <input type="date" id="date" name="date" required /></br>
 
             <label for="time">Time:</label>
             <input type="time" id="time" name="time" required />
 
             <button type="button" onclick="submitForm()">Submit</button>
           </form>
-        </div> -->
+        </div>
+
+        <!-- Add project -->
+        <div class="add_project_content">
+        <input type="text" class="add_project_input">
+        </div>
 
         <!-- add Note -->
-        <div class="add_note_content">
+        <div class="add_note_content hidden">
           <textarea
             name="note"
             id="add_note_input"
