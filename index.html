@@ -9,10 +9,11 @@
   </head>
   <body>
     <div class="app_container">
+      
       <div class="sidebar">
         
         <div class="home_page">Your to-dos</div>
-        <div class="today_page">Today's plans</div>
+        <!-- <div class="today_page">Today's plans</div> -->
         <div class="projects_page">Projects
 <!-- Projects list -->
           <div class="project"> --  Home</div>
@@ -22,14 +23,15 @@
 
         <button class="add-activity-btn">+</button>
       </div>
+      
       <div class="main-screen">
         <div class="page_type">Today's plans</div>
         <hr class="custom-line" />
 
         <!-- Notes content -->
 
-        <!-- <div class="notes">
-          <div id="note">
+        <div class="notes hidden">
+          <div class="note">
             <div class="note_title">LALALALA</div>
             <div class="note_text">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
@@ -42,25 +44,20 @@
             <button class="note_dlt_btn">🗑</button>
           </div>
           </div>
-
-          <div id="note">
-            <div class="note_text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
-              dolore ut velit, ipsam rem, quia placeat qui 
-            </div>
-            <div class="note_btns">
-            <button class="note_edit_btn">🖋</button>
-            <button class="note_dlt_btn">🗑</button>
-          </div>
           </div>
 
+          <!-- Projects -->
 
-          </div> -->
         <!-- Your Todos -->
           <div class="to-dos_page">
-            <div id="task">
-              <div class="taskTitle"></div>
+            <div class="tasks">
+            <div class="task">
+              <div class="task-title">Job</div>
+<div class="task-text"> Call Mike. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe earum quia sit asperiores ex sequi blanditiis accusantium obcaecati, voluptates aspernatur? Reiciendis id cupiditate ullam necessitatibus consequuntur praesentium cumque illo libero?</div>
+<div class="task-data"> 19 Feb </div>
+<div class="task-time">19 : 00</div>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -85,7 +82,7 @@
         <!-- Main activities-->
 
         <!-- Create task -->
-        <div class="add_task_content  ">
+        <div class="add_task_content ">
 
           <textarea
           name="task"
@@ -106,14 +103,17 @@
           <form id="dateTimeForm">
           
             <label for="date">Date:</label>
-            <input type="date" id="date" name="date" required /></br>
+            <input type="date" id="add_task_date" name="date" required /></br>
 
             <label for="time">Time:</label>
-            <input type="time" id="time" name="time" required />
+            <input type="time" id="add_task_time" name="time" required />
 
             
           </form>
-          <button type="button" class="add_task_btn"submitForm()">CREATE</button>
+          <button type="button" class="add_task_btn">CREATE</button>
+          <select id="append_task_to">
+            <option data-type="1">Project</option>
+          </select>
         </div>
 
         <!-- Add project -->

@@ -31,7 +31,7 @@ body {
   max-width: 20vw; */
   height: 100%;
   min-height: 600px;
-  justify-content: space-between;
+  justify-content: start;
   list-style: none;
   padding: 20px;
   box-sizing: border-box;
@@ -40,18 +40,24 @@ body {
 }
 
 .add-activity-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 60px;
   height: 60px;
   border-radius: 30px;
   font-size: 60px;
-  margin-top: auto;
-  text-align: center;
   align-self: center;
 }
 
 .sidebar div {
   padding: 30px;
   font-size: 20px;
+  /* cursor: pointer; */
+}
+
+.sidebar div :hover {
+  cursor: pointer;
 }
 
 .main-screen {
@@ -64,7 +70,7 @@ body {
   padding: 10px;
 }
 .page_type {
-  padding: 20px;
+  padding: 0 5px 5px 5px;
   text-align: center;
   font-size: 24px;
   background-color: rgb(255, 255, 255);
@@ -148,6 +154,15 @@ body {
   display: flex;
   flex-direction: row;
 }
+#append_task_to {
+  position: absolute;
+  bottom: 8.2%;
+  right: 10%;
+  background-color: #b6b3b3;
+  border: 0;
+  border-radius: 10px;
+  padding: 2px 5px;
+}
 
 #dateTimeForm {
   margin-top: auto;
@@ -214,7 +229,7 @@ body {
   width: 80px;
   height: 30px;
   border-radius: 5px;
-  bottom: 10%;
+  bottom: 7%;
   left: 54%;
   background-color: #1da1f2;
   border: 1px solid rgb(137, 147, 160);
@@ -252,12 +267,12 @@ body {
 }
 
 .notes {
-  display: flex;
+  /* display: flex; */
   flex-wrap: wrap;
   margin: 60px;
 }
 
-#note {
+.note {
   display: flex;
   font-size: 20px;
   flex-direction: column;
@@ -289,17 +304,75 @@ body {
 }
 
 /* Task page content */
-
-#task {
+.task {
   display: flex;
   flex-direction: row;
+  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 130%;
+  flex-wrap: nowrap;
   width: auto;
-  height: 80px;
-  background-color: #ffeffc;
+  height: 70px;
+  background-color: #f1e7ef;
   border: 1px solid rgb(205, 222, 230);
   -webkit-box-shadow: 0px 10px 13px -7px #000000,
     5px 5px 15px 5px rgba(0, 0, 0, 0);
   box-shadow: 0px 10px 13px -12px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 
-  margin: 4%;
+  margin: 15px;
+  overflow: hidden;
+}
+
+.task-text,
+.task-title,
+.task-data,
+.task-time {
+  padding: 10px;
+  text-align: center;
+}
+
+.task-text {
+  height: inherit;
+  width: 60%;
+  flex-grow: 3;
+  padding: 5px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+.task-time,
+.task-data {
+  flex-grow: 2;
+}
+
+.task-title {
+  width: inherit;
+  margin: 0 0 0 30px;
+  font-weight: 700;
+  font-size: 28px;
+  overflow: visible;
+  color: #6c065a;
+}
+
+/* Scrollbar design */
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: auto;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(218, 112, 112);
+  border-radius: 10px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
