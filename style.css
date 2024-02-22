@@ -287,3 +287,19 @@ body {
   font-weight: 900;
   font-size: 24px;
 }
+
+/* Task page content */
+
+#task {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: 80px;
+  background-color: #ffeffc;
+  border: 1px solid rgb(205, 222, 230);
+  -webkit-box-shadow: 0px 10px 13px -7px #000000,
+    5px 5px 15px 5px rgba(0, 0, 0, 0);
+  box-shadow: 0px 10px 13px -12px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+
+  margin: 4%;
+}
