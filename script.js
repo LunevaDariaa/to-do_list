@@ -30,6 +30,7 @@ const sidebar = document.querySelector(".sidebar");
 
 //Main Screen content:
 const toDoPage = document.querySelector(".to-dos_page");
+const projectsPage = document.querySelector(".projects");
 
 // const homePage = document.querySelector(".home_page");
 // const todayPage = document.querySelector(".today_page");
@@ -46,7 +47,7 @@ class App {
 
     addProjectBtn.addEventListener("click", this._addProject.bind(this));
 
-    sidebar.addEventListener("click", this._pageRedirection);
+    sidebar.addEventListener("click", this._pageRedirection.bind(this));
   }
 
   //methods
@@ -101,17 +102,34 @@ class App {
     newProject._addProject(projectTitle.value);
   }
 
-  _pageRedirection(e) {
-    if (e.target.classList.contains("notepad_page")) {
-      console.log("note");
-      toDoPage.classList.add("hidden");
-      noteContainer.classList.remove("hidden");
-    }
-  }
-
-  _showPagesContent() {
+  _hidePagesContent() {
     toDoPage.classList.add("hidden");
     noteContainer.classList.add("hidden");
+    projectsPage.classList.add("hidden");
+  }
+  // _pageHeader() {
+  //   const pageType = document.querySelector(".page_type");
+  // }
+  _pageRedirection(e) {
+    let pageType = document.querySelector(".page_type");
+
+    if (e.target.classList.contains("notepad_page")) {
+      this._hidePagesContent();
+      noteContainer.classList.remove("hidden");
+      pageType.innerHTML = e.target.innerHTML;
+    }
+
+    if (e.target.classList.contains("projects_page")) {
+      this._hidePagesContent();
+      projectsPage.classList.remove("hidden");
+      pageType.innerHTML = "Projects";
+    }
+
+    if (e.target.classList.contains("home_page")) {
+      this._hidePagesContent();
+      toDoPage.classList.remove("hidden");
+      pageType.innerHTML = e.target.innerHTML;
+    }
   }
 }
 

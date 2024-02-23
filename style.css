@@ -24,7 +24,7 @@ body {
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 250px;
   padding: 100px 0 0 0;
   background-color: rgb(244, 244, 244);
   /* min-width: 20vw;
@@ -66,7 +66,7 @@ body {
   height: 100%;
   box-sizing: border-box;
 }
-.projects_page .project {
+.projects_page .projects_project {
   padding: 10px;
 }
 .page_type {
@@ -269,7 +269,7 @@ body {
 .notes {
   /* display: flex; */
   flex-wrap: wrap;
-  margin: 60px;
+  margin: 25px;
 }
 
 .note {
@@ -308,13 +308,13 @@ body {
   display: flex;
   flex-direction: row;
   text-align: center;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  font-size: 130%;
+  font-size: 90%;
   flex-wrap: nowrap;
   width: auto;
-  height: 70px;
-  background-color: #f1e7ef;
+  height: 50px;
+  background-color: #fcefef;
   border: 1px solid rgb(205, 222, 230);
   -webkit-box-shadow: 0px 10px 13px -7px #000000,
     5px 5px 15px 5px rgba(0, 0, 0, 0);
@@ -334,11 +334,12 @@ body {
 
 .task-text {
   height: inherit;
-  width: 60%;
-  flex-grow: 3;
-  padding: 5px;
+  /* width: 60%; */
+  flex-grow: 8;
+  padding: 10px;
   overflow-y: auto;
   box-sizing: border-box;
+  text-align: center;
 }
 .task-time,
 .task-data {
@@ -349,7 +350,7 @@ body {
   width: inherit;
   margin: 0 0 0 30px;
   font-weight: 700;
-  font-size: 28px;
+  font-size: 20px;
   overflow: visible;
   color: #6c065a;
 }
@@ -375,4 +376,45 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.project {
+  width: 90%;
+  margin: 10px 20px;
+  background-color: #e1d9d9;
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 1000;
+  color: #670655;
+}
+
+/* Checkbox */
+.control_indicator {
+  /* position: ; */
+  width: 25px;
+  height: 25px;
+  margin: 10px;
+  flex-grow: 1;
+  background: #e6e6e6;
+  border: 0px dashed #000000;
+  border-radius: 10px;
+}
+.control_indicator:checked {
+  background-color: #000000;
+}
+
+.task_dlt_btn {
+  /* flex-grow: 1; */
+  margin-right: 10px;
+  border-radius: 7px;
+
+  background-color: #b2281c;
+  color: white;
+  font-size: 10px;
+  /* text-align: center; */
+
+  height: 20px;
+  width: 20px;
+  border: 1px solid rgb(147, 131, 111);
 }
