@@ -32,11 +32,102 @@ const sidebar = document.querySelector(".sidebar");
 const toDoPage = document.querySelector(".to-dos_page");
 const projectsPage = document.querySelector(".projects");
 
-// const homePage = document.querySelector(".home_page");
-// const todayPage = document.querySelector(".today_page");
-// const projectPage = document.querySelector(".projects_page");
-// const notepadPage = document.querySelector(".notepad_page");
+class Project {
+  constructor(projectTitle) {
+    this.projectTitle = projectTitle;
+  }
+
+  _addProject(title) {
+    const text = `<div class="project"> -- ${title} </div>`;
+    const ProjectContainer = document.querySelector(".projects_page");
+    ProjectContainer.insertAdjacentHTML("beforeend", text);
+  }
+}
+
+class Task {
+  #tasks = [];
+  constructor(taskTitle, taskTextArea, taskDate, taskTime) {
+    this.taskTitle = taskTitle;
+    this.taskTextArea = taskTextArea;
+    this.taskDate = taskDate;
+    this.taskTime = taskTime;
+  }
+
+  _taskCreation(title, textarea, date, time) {
+    const text = `<div class="task">
+<div class="task-title">${title}</div>
+<div class="task-text"> ${textarea}</div>
+<div class="task-data"> ${date}</div>
+<div class="task-time">${time}</div>
+</div>`;
+
+    taskContainer.insertAdjacentHTML("afterbegin", text);
+  }
+
+  _addTask() {
+    const newTask = {
+      title: this.taskTitle,
+      text: this.taskTextArea,
+      date: this.taskDate,
+      time: this.taskTime,
+    };
+    this.#tasks.push(newTask);
+    console.log(this.#tasks);
+    this._taskCreation(
+      this.taskTitle,
+      this.taskTextArea,
+      this.taskDate,
+      this.taskTime
+    );
+  }
+}
+
+class Note {
+  static dataTypeCounter = 1;
+
+  constructor(noteTitle, noteTextarea) {
+    this.noteTitle = noteTitle;
+    this.noteTextarea = noteTextarea;
+    this.dataType = Note.dataTypeCounter++;
+  }
+
+  _noteCreation(title, note) {
+    const text = `<div class="note" data-type=${this.dataType}>
+    <div class="note_title" >${title}</div>
+      <div class="note_text">
+       ${note}
+       <div class="note_btns">
+       <button class="note_edit_btn">🖋</button>
+       <button class="note_dlt_btn">🗑</button>
+     </div>
+     </div>`;
+
+    // console.log(this.notes.dataType);
+    noteContainer.insertAdjacentHTML("afterbegin", text);
+  }
+
+  _addNote() {
+    const newNote = {
+      title: this.noteTitle,
+      note: this.noteTextarea,
+      dataType: this.dataType,
+    };
+
+    this._noteCreation(this.noteTitle, this.noteTextarea);
+
+    App.notes.push(newNote);
+    console.log(App.notes);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function (e) {
+  e.preventDefault();
+  const appInstance = new App();
+});
+
 class App {
+  static notes = [];
+
   constructor() {
     addActBtn.addEventListener("click", this._openModal.bind(this));
     closeModalBtn.addEventListener("click", this._closeModal.bind(this));
@@ -48,6 +139,12 @@ class App {
     addProjectBtn.addEventListener("click", this._addProject.bind(this));
 
     sidebar.addEventListener("click", this._pageRedirection.bind(this));
+
+    // Bind the event listener functions to the instance
+    this._modifyNote = this._modifyNote.bind(this);
+    // this._deleteNote = this._deleteNote.bind(this);
+
+    noteContainer.addEventListener("click", this._modifyNote.bind(this));
   }
 
   //methods
@@ -131,90 +228,33 @@ class App {
       pageType.innerHTML = e.target.innerHTML;
     }
   }
-}
 
-class Project {
-  constructor(projectTitle) {
-    this.projectTitle = projectTitle;
+  _editNote() {}
+
+  _deleteNote(noteE) {
+    const noteIndex = App.notes.find((note) => note.dataType == noteE);
+
+    //Remove note from the array:
+    if (noteIndex !== -1) {
+      App.notes.splice(noteIndex, 1);
+    }
+
+    //Remove note from the page:
+    const noteEl = document.querySelector(`.note[data-type="${noteE}"]`);
+    if (noteEl) {
+      noteEl.remove();
+      console.log(App.notes);
+    }
   }
 
-  _addProject(title) {
-    const text = `<div class="project"> -- ${title} </div>`;
-    const ProjectContainer = document.querySelector(".projects_page");
-    ProjectContainer.insertAdjacentHTML("beforeend", text);
-  }
-}
-
-class Task {
-  #tasks = [];
-  constructor(taskTitle, taskTextArea, taskDate, taskTime) {
-    this.taskTitle = taskTitle;
-    this.taskTextArea = taskTextArea;
-    this.taskDate = taskDate;
-    this.taskTime = taskTime;
-  }
-
-  _taskCreation(title, textarea, date, time) {
-    const text = `<div class="task">
-<div class="task-title">${title}</div>
-<div class="task-text"> ${textarea}</div>
-<div class="task-data"> ${date}</div>
-<div class="task-time">${time}</div>
-</div>`;
-
-    taskContainer.insertAdjacentHTML("afterbegin", text);
-  }
-
-  _addTask() {
-    const newTask = {
-      title: this.taskTitle,
-      text: this.taskTextArea,
-      date: this.taskDate,
-      time: this.taskTime,
-    };
-    this.#tasks.push(newTask);
-    console.log(this.#tasks);
-    this._taskCreation(
-      this.taskTitle,
-      this.taskTextArea,
-      this.taskDate,
-      this.taskTime
-    );
+  _modifyNote(e) {
+    //delete
+    const deleteBtn = e.target.closest(".note_dlt_btn");
+    if (deleteBtn) {
+      const noteTodelete = e.target.closest(".note").dataset.type;
+      this._deleteNote(noteTodelete);
+    }
+    //edit
+    const editBtn = e.target.closest(".note_edit_btn");
   }
 }
-
-class Note {
-  #notes = [];
-  constructor(noteTextarea, noteTitle) {
-    this.noteTitle = noteTitle;
-    this.noteTextarea = noteTextarea;
-    // addNoteBtn.addEventListener("click", this._addNote.bind(this));
-  }
-
-  _noteCreation(title, note) {
-    const text = `<div class="note">
-    <div class="note_title">${title}</div>
-      <div class="note_text">
-       ${note}
-       <div class="note_btns">
-       <button class="note_edit_btn">🖋</button>
-       <button class="note_dlt_btn">🗑</button>
-     </div>
-     </div>`;
-    noteContainer.insertAdjacentHTML("afterbegin", text);
-  }
-
-  _addNote() {
-    const newNote = {
-      title: this.noteTitle,
-      note: this.noteTextarea,
-    };
-
-    this.#notes.push(newNote);
-    console.log(this.#notes);
-    this._noteCreation(this.noteTitle, this.noteTextarea);
-  }
-}
-document.addEventListener("DOMContentLoaded", function () {
-  const appInstance = new App();
-});
