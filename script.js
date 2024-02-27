@@ -142,7 +142,6 @@ class App {
 
     // Bind the event listener functions to the instance
     this._modifyNote = this._modifyNote.bind(this);
-    // this._deleteNote = this._deleteNote.bind(this);
 
     noteContainer.addEventListener("click", this._modifyNote.bind(this));
   }
@@ -229,18 +228,61 @@ class App {
     }
   }
 
-  _editNote() {}
+  _editNote(noteToModify) {
+    console.log("App.notes:", App.notes);
 
-  _deleteNote(noteE) {
-    const noteIndex = App.notes.find((note) => note.dataType == noteE);
+    const noteData = App.notes.find((note) => note.dataType == noteToModify);
 
+    console.log("noteData:", noteData);
+    if (!noteData) {
+      console.error("Note not found for editing");
+      return;
+    }
+
+    // let noteIndex = App.notes.findIndex((note) => note === noteData);
+    // noteIndex++;
+    // console.log(noteIndex);
+    this._openModal();
+
+    noteTitle.value = noteData.title;
+    noteTextarea.value = noteData.note;
+
+    addNoteBtn.addEventListener("click", () => {
+      const modifiedTitle = noteTitle.value;
+      const modifiedText = noteTextarea.value;
+
+      // Remove the existing note from the page and array
+      const noteIndex = App.notes.findIndex((note) => note === noteData);
+      const noteElement = document.querySelector(
+        `.note[data-type="${noteToModify}"]`
+      );
+
+      if (noteIndex !== -1 && noteElement) {
+        noteElement.remove();
+        App.notes.splice(noteIndex, 1);
+
+        // Add the modified note to the page and array
+        const newNote = new Note(modifiedTitle, modifiedText);
+        newNote._addNote();
+
+        // Close the modal after saving the changes
+        this._closeModal();
+      } else {
+        console.error("Error updating note");
+      }
+    });
+  }
+
+  _deleteNote(noteToModify) {
+    const noteIndex = App.notes.find((note) => note.dataType == noteToModify);
+    console.log(noteIndex);
     //Remove note from the array:
     if (noteIndex !== -1) {
       App.notes.splice(noteIndex, 1);
     }
 
     //Remove note from the page:
-    const noteEl = document.querySelector(`.note[data-type="${noteE}"]`);
+    const noteEl = document.querySelector(`.note[data-type="${noteToModify}"]`);
     if (noteEl) {
       noteEl.remove();
       console.log(App.notes);
@@ -250,11 +292,15 @@ class App {
   _modifyNote(e) {
     //delete
     const deleteBtn = e.target.closest(".note_dlt_btn");
+    const noteToModify = e.target.closest(".note").dataset.type;
     if (deleteBtn) {
-      const noteTodelete = e.target.closest(".note").dataset.type;
-      this._deleteNote(noteTodelete);
+      this._deleteNote(noteToModify);
     }
     //edit
     const editBtn = e.target.closest(".note_edit_btn");
+    if (editBtn) {
+      console.log(noteToModify);
+      this._editNote(noteToModify);
+    }
   }
 }
