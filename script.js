@@ -11,6 +11,8 @@ const noteTitle = document.querySelector("#add_note_title");
 const addTaskSidebar = document.querySelector(".add_task_sidebar");
 const noteContainer = document.querySelector(".notes");
 const taskContainer = document.querySelector(".tasks");
+const projectsContainer = document.querySelector(".projects");
+
 // Selectors for types of activity:
 const addNote = document.querySelector(".add_note_content");
 const addTask = document.querySelector(".add_task_content");
@@ -37,15 +39,19 @@ class Project {
     this.projectTitle = projectTitle;
   }
 
-  _addProject(title) {
-    const text = `<div class="project"> -- ${title} </div>`;
-    const ProjectContainer = document.querySelector(".projects_page");
-    ProjectContainer.insertAdjacentHTML("beforeend", text);
+  _addProjectSide(title) {
+    const text = `<div class="projects_project"> -- ${title} </div>`;
+    const ProjectContainerSide = document.querySelector(".projects_page");
+    ProjectContainerSide.insertAdjacentHTML("beforeend", text);
+  }
+
+  _addProjectMain(project) {
+    const text = `<div class="project">${project}</div>`;
+    projectsContainer.insertAdjacentHTML("beforebegin", text);
   }
 }
 
 class Task {
-  #tasks = [];
   constructor(taskTitle, taskTextArea, taskDate, taskTime) {
     this.taskTitle = taskTitle;
     this.taskTextArea = taskTextArea;
@@ -55,10 +61,12 @@ class Task {
 
   _taskCreation(title, textarea, date, time) {
     const text = `<div class="task">
+    <input type="checkbox" class="control_indicator"/>
 <div class="task-title">${title}</div>
 <div class="task-text"> ${textarea}</div>
 <div class="task-data"> ${date}</div>
 <div class="task-time">${time}</div>
+<button class="task_dlt_btn">X</button>
 </div>`;
 
     taskContainer.insertAdjacentHTML("afterbegin", text);
@@ -71,19 +79,20 @@ class Task {
       date: this.taskDate,
       time: this.taskTime,
     };
-    this.#tasks.push(newTask);
-    console.log(this.#tasks);
+    App.tasks.push(newTask);
+    console.log(App.tasks);
     this._taskCreation(
       this.taskTitle,
       this.taskTextArea,
       this.taskDate,
       this.taskTime
     );
+    // App._timeConvertion();
   }
 }
 
 class Note {
-  static dataTypeCounter = 1;
+  static dataTypeCounter = 0;
 
   constructor(noteTitle, noteTextarea) {
     this.noteTitle = noteTitle;
@@ -127,6 +136,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 class App {
   static notes = [];
+  static tasks = [];
+  static projects = [];
 
   constructor() {
     addActBtn.addEventListener("click", this._openModal.bind(this));
@@ -142,12 +153,17 @@ class App {
 
     // Bind the event listener functions to the instance
     this._modifyNote = this._modifyNote.bind(this);
-
+    this._clearNote.bind(this);
+    this._timeConvertion.bind(this);
     noteContainer.addEventListener("click", this._modifyNote.bind(this));
   }
 
   //methods
-
+  _timeConvertion() {
+    const currentDate = new Date();
+    const [year, month, day] = taskDateS.value.split("-");
+    console.log(month, day);
+  }
   _defineType(e) {
     e.preventDefault();
 
@@ -181,6 +197,8 @@ class App {
 
     const newNote = new Note(noteTitleValue, noteTextareaValue);
     newNote._addNote();
+    this._clearNote();
+    this._closeModal();
   }
 
   _addTask() {
@@ -191,11 +209,15 @@ class App {
       taskTimeS.value
     );
     newTask._addTask();
+    this._timeConvertion();
   }
 
   _addProject() {
     const newProject = new Project(projectTitle.value);
-    newProject._addProject(projectTitle.value);
+    App.projects.push(newProject);
+    console.log(App.projects);
+    newProject._addProjectSide(projectTitle.value);
+    newProject._addProjectMain(projectTitle.value);
   }
 
   _hidePagesContent() {
@@ -234,23 +256,13 @@ class App {
     const noteData = App.notes.find((note) => note.dataType == noteToModify);
 
     console.log("noteData:", noteData);
-    if (!noteData) {
-      console.error("Note not found for editing");
-      return;
-    }
 
-    // let noteIndex = App.notes.findIndex((note) => note === noteData);
-    // noteIndex++;
-    // console.log(noteIndex);
     this._openModal();
 
     noteTitle.value = noteData.title;
     noteTextarea.value = noteData.note;
 
     addNoteBtn.addEventListener("click", () => {
-      const modifiedTitle = noteTitle.value;
-      const modifiedText = noteTextarea.value;
-
       // Remove the existing note from the page and array
       const noteIndex = App.notes.findIndex((note) => note === noteData);
       const noteElement = document.querySelector(
@@ -261,14 +273,8 @@ class App {
         noteElement.remove();
         App.notes.splice(noteIndex, 1);
 
-        // Add the modified note to the page and array
-        const newNote = new Note(modifiedTitle, modifiedText);
-        newNote._addNote();
-
         // Close the modal after saving the changes
         this._closeModal();
-      } else {
-        console.error("Error updating note");
       }
     });
   }
@@ -302,5 +308,10 @@ class App {
       console.log(noteToModify);
       this._editNote(noteToModify);
     }
+  }
+
+  _clearNote() {
+    noteTitle.value = "";
+    noteTextarea.value = "";
   }
 }
