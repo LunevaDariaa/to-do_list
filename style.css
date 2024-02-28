@@ -24,9 +24,10 @@ body {
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: 220px;
   padding: 100px 0 0 0;
-  background-color: rgb(244, 244, 244);
+  background-color: rgb(62, 60, 60);
+  /* background-color: rgb(244, 244, 244); */
   /* min-width: 20vw;
   max-width: 20vw; */
   height: 100%;
@@ -35,9 +36,10 @@ body {
   list-style: none;
   padding: 20px;
   box-sizing: border-box;
-  color: #114566;
+  color: #e6e6e6;
+  /* color: #114566; */
   font-weight: 800;
-  border-right: 4px solid #b6b3b3;
+  border-right: 1px solid #b6b3b3;
 }
 
 .add-activity-btn {
@@ -75,8 +77,10 @@ body {
 .page_type {
   padding: 0 5px 5px 5px;
   text-align: center;
-  font-size: 24px;
+  font-size: 26px;
+  font-weight: 800;
   background-color: rgb(255, 255, 255);
+  color: rgb(30, 30, 30);
 }
 
 .add_task_page {
@@ -115,7 +119,7 @@ body {
   border: 1px solid rgb(161, 158, 158);
 }
 .custom-line {
-  border: 2px solid #b6b3b3; /* Set the color and style of the line */
+  border: 1px solid #b6b3b3; /* Set the color and style of the line */
   margin: 0; /* Adjust spacing around the line */
 }
 
