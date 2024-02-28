@@ -234,6 +234,8 @@ class App {
       taskTimeS.value
     );
     newTask._addTask();
+    this._clearTask();
+    this._closeModal();
   }
 
   _addProject() {
@@ -348,6 +350,13 @@ class App {
   _clearNote() {
     noteTitle.value = "";
     noteTextarea.value = "";
+  }
+
+  _clearTask() {
+    taskTitleS.value = "";
+    taskInputS.value = "";
+    taskDateS.value = "";
+    taskDateS.value = "";
   }
 
   _modifyTask(e) {

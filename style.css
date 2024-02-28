@@ -31,20 +31,23 @@ body {
   max-width: 20vw; */
   height: 100%;
   min-height: 600px;
-  justify-content: start;
+  position: relative;
   list-style: none;
   padding: 20px;
   box-sizing: border-box;
   color: #114566;
   font-weight: 800;
+  border-right: 4px solid #b6b3b3;
 }
 
 .add-activity-btn {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 60px;
   height: 60px;
+  bottom: 40px;
   border-radius: 30px;
   font-size: 60px;
   align-self: center;
@@ -113,13 +116,13 @@ body {
 }
 .custom-line {
   border: 2px solid #b6b3b3; /* Set the color and style of the line */
-  margin: 0 10px; /* Adjust spacing around the line */
+  margin: 0; /* Adjust spacing around the line */
 }
 
 .add_task_header {
   width: auto;
   height: 12%;
-  background-color: rgb(189, 189, 189);
+  background-color: rgb(38, 38, 39);
   margin: 0;
   padding: 8px;
 }
@@ -143,10 +146,21 @@ body {
   padding: 4% 2%; /* Use percentage for padding */
   font-size: 20px;
 }
-.add_task_content {
-  /* flex: 1; */
-  /* background-color: lightgray;  */
-  padding: 20px 8px 10px 8px; /* Add padding for spacing */
+/* .add_task_content {
+  
+  padding: 20px 8px 10px 8px; 
+} */
+.add_task_content,
+.add_project_content,
+.add_note_content {
+  flex: 1;
+  padding: 20px 8px 10px 8px;
+  box-sizing: border-box;
+  overflow-y: auto; /* Add scrolling for smaller screens */
+}
+
+.add_note_content {
+  flex-direction: column;
 }
 .add_tasks_content {
   height: 84%;
@@ -184,12 +198,12 @@ body {
   box-sizing: border-box;
 }
 
-.add_note_content {
-  display: none; /* Initially hide the element */
+/* .add_note_content {
+  display: none; 
   flex-direction: column;
   width: 100%;
-  padding: 5% 5% 5% 0; /* Adjust padding as needed */
-}
+  padding: 5% 5% 5% 0; 
+} */
 
 .add_note_content:not(.hidden) {
   display: flex;
@@ -208,7 +222,7 @@ body {
 #add_note_input {
   align-self: center;
 
-  margin: 10px 0;
+  margin: 7px 0;
   border: 1px solid #ccc; /* Add a border for a more polished look */
   resize: none; /* Disable textarea resizing handle */
   overflow-y: auto; /* Enable vertical scrolling */
@@ -236,7 +250,7 @@ body {
   color: white;
 }
 
-.add_project_content {
+#add_project_content {
   width: 100%;
 }
 .add_project_input,
@@ -281,7 +295,7 @@ body {
   height: auto;
   padding: 10px;
   text-align: center;
-  background-color: rgb(231, 223, 214);
+  background-color: rgb(246, 236, 224);
   margin: 10px 15px;
   position: relative;
   border-radius: 6px;
@@ -289,10 +303,16 @@ body {
 
 .note_dlt_btn,
 .note_edit_btn {
+  margin: 5px 0;
   border-radius: 7px;
   border: 0;
   height: 25px;
   width: 25px;
+  background-color: #cad1d6;
+  color: #000000;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 900;
 }
 
 .note_btns {
@@ -319,11 +339,11 @@ body {
   flex-wrap: nowrap;
   width: auto;
   height: 50px;
-  background-color: #fcefef;
-  border: 1px solid rgb(205, 222, 230);
+  background-color: #f2edf3;
+  border: 1px solid rgb(175, 185, 189);
   -webkit-box-shadow: 0px 10px 13px -7px #000000,
     5px 5px 15px 5px rgba(0, 0, 0, 0);
-  box-shadow: 0px 10px 13px -12px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+  box-shadow: 10px 10px 13px -18px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 
   margin: 15px;
   overflow: hidden;
