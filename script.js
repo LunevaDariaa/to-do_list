@@ -52,15 +52,17 @@ class Project {
 }
 
 class Task {
+  static dataTypeCounter = 0;
   constructor(taskTitle, taskTextArea, taskDate, taskTime) {
     this.taskTitle = taskTitle;
     this.taskTextArea = taskTextArea;
     this.taskDate = taskDate;
     this.taskTime = taskTime;
+    this.dataType = Task.dataTypeCounter++;
   }
 
   _taskCreation(title, textarea, date, time) {
-    const text = `<div class="task">
+    const text = `<div class="task" data-type=${this.dataType}>
     <input type="checkbox" class="control_indicator"/>
 <div class="task-title">${title}</div>
 <div class="task-text"> ${textarea}</div>
@@ -78,16 +80,16 @@ class Task {
       text: this.taskTextArea,
       date: this.taskDate,
       time: this.taskTime,
+      dataType: this.dataType,
     };
     App.tasks.push(newTask);
     console.log(App.tasks);
     this._taskCreation(
       this.taskTitle,
       this.taskTextArea,
-      this.taskDate,
+      App._timeConvertion(taskDateS),
       this.taskTime
     );
-    // App._timeConvertion();
   }
 }
 
@@ -138,7 +140,6 @@ class App {
   static notes = [];
   static tasks = [];
   static projects = [];
-
   constructor() {
     addActBtn.addEventListener("click", this._openModal.bind(this));
     closeModalBtn.addEventListener("click", this._closeModal.bind(this));
@@ -154,15 +155,39 @@ class App {
     // Bind the event listener functions to the instance
     this._modifyNote = this._modifyNote.bind(this);
     this._clearNote.bind(this);
-    this._timeConvertion.bind(this);
+    this._timeConvertion;
+    this._modifyTask = this._modifyTask.bind(this);
+
     noteContainer.addEventListener("click", this._modifyNote.bind(this));
+    taskContainer.addEventListener("click", this._modifyTask);
   }
 
   //methods
-  _timeConvertion() {
+  static _timeConvertion(date) {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
     const currentDate = new Date();
-    const [year, month, day] = taskDateS.value.split("-");
-    console.log(month, day);
+    const [year, month, day] = date.value.split("-");
+    // Convert month to a number
+    const monthNumber = parseInt(month, 10);
+
+    // Get the corresponding month name
+    const monthName = months[monthNumber - 1];
+
+    return `${monthName}, ${day}`;
   }
   _defineType(e) {
     e.preventDefault();
@@ -209,7 +234,6 @@ class App {
       taskTimeS.value
     );
     newTask._addTask();
-    this._timeConvertion();
   }
 
   _addProject() {
@@ -313,5 +337,33 @@ class App {
   _clearNote() {
     noteTitle.value = "";
     noteTextarea.value = "";
+  }
+
+  //Task staff
+
+  _deleteTask(taskToModify) {
+    const taskIndex = App.tasks.find((task) => task.dataType == taskToModify);
+    console.log(taskIndex);
+    //Remove task from the array:
+    if (taskIndex !== -1) {
+      App.tasks.splice(taskIndex, 1);
+    }
+
+    //Remove task from the page:
+    const taskEl = document.querySelector(`.task[data-type="${taskToModify}"]`);
+    if (taskEl) {
+      taskEl.remove();
+      console.log(App.tasks);
+    }
+  }
+
+  _modifyTask(e) {
+    const deleteBtn = e.target.closest(".task_dlt_btn");
+
+    const taskToModify = e.target.closest(".task").dataset.type;
+
+    if (deleteBtn) {
+      this._deleteTask(taskToModify);
+    }
   }
 }
