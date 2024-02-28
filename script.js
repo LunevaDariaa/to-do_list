@@ -303,20 +303,31 @@ class App {
     });
   }
 
-  _deleteNote(noteToModify) {
-    const noteIndex = App.notes.find((note) => note.dataType == noteToModify);
-    console.log(noteIndex);
-    //Remove note from the array:
-    if (noteIndex !== -1) {
-      App.notes.splice(noteIndex, 1);
+  _deleteItem(itemArray, itemType, itemToModify) {
+    const itemIndex = itemArray.findIndex(
+      (item) => item.dataType == itemToModify
+    );
+
+    // Remove item from the array:
+    if (itemIndex !== -1) {
+      itemArray.splice(itemIndex, 1);
     }
 
-    //Remove note from the page:
-    const noteEl = document.querySelector(`.note[data-type="${noteToModify}"]`);
-    if (noteEl) {
-      noteEl.remove();
-      console.log(App.notes);
+    // Remove item from the page:
+    const itemEl = document.querySelector(
+      `.${itemType}[data-type="${itemToModify}"]`
+    );
+    if (itemEl) {
+      itemEl.remove();
+      console.log(itemArray);
     }
+  }
+  _deleteNote(noteToModify) {
+    this._deleteItem(App.notes, "note", noteToModify);
+  }
+
+  _deleteTask(taskToModify) {
+    this._deleteItem(App.tasks, "task", taskToModify);
   }
 
   _modifyNote(e) {
@@ -337,24 +348,6 @@ class App {
   _clearNote() {
     noteTitle.value = "";
     noteTextarea.value = "";
-  }
-
-  //Task staff
-
-  _deleteTask(taskToModify) {
-    const taskIndex = App.tasks.find((task) => task.dataType == taskToModify);
-    console.log(taskIndex);
-    //Remove task from the array:
-    if (taskIndex !== -1) {
-      App.tasks.splice(taskIndex, 1);
-    }
-
-    //Remove task from the page:
-    const taskEl = document.querySelector(`.task[data-type="${taskToModify}"]`);
-    if (taskEl) {
-      taskEl.remove();
-      console.log(App.tasks);
-    }
   }
 
   _modifyTask(e) {
